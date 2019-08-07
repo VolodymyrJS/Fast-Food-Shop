@@ -12,11 +12,19 @@ class BurgerBuilder extends React.Component {
       bacon: 0
     }
   };
+
+  addIngredientHandler = type => {
+    const oldCount = this.state.ingredients[type];
+    console.log(oldCount);
+  };
+
+  removeIngredientHandler = () => {};
+
   render() {
     return (
       <Helper>
         <Burger ingredients={this.state.ingredients} />
-        <BuildControls />
+        <BuildControls add={() => this.addIngredientHandler()} />
       </Helper>
     );
   }
