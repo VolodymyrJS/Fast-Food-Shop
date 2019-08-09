@@ -15,7 +15,6 @@ const burger = props => {
   if (modifiedIngredients.length === 0) {
     modifiedIngredients = <div>Please start adding ingredients.</div>;
   }
-  console.log(modifiedIngredients);
   return (
     <div className={classes.Burger}>
       <BurgerIngredient type="bread-top" />
