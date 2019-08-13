@@ -1,9 +1,10 @@
-import React from 'react';
-import Helper from '../../HOC/Helper';
-import Burger from '../../components/Burger/Burger';
-import BuildControls from '../../components/Burger/BuildControls/BuildControls';
-import Modal from '../../components/UI/Modal/Modal';
-import OrderSummury from '../../components/Burger/OrderSummury/OrderSummury';
+import React from "react";
+import Helper from "../../HOC/Helper";
+import Burger from "../../components/Burger/Burger";
+import BuildControls from "../../components/Burger/BuildControls/BuildControls";
+import Modal from "../../components/UI/Modal/Modal";
+import OrderSummury from "../../components/Burger/OrderSummury/OrderSummury";
+import axios from "../../axios-order";
 
 const INGREDIENTS_PRICES = {
   salad: 0.4,
@@ -74,7 +75,24 @@ class BurgerBuilder extends React.Component {
   };
 
   purchasingContinutHandler = () => {
-    alert('You continue!');
+    const orderData = {
+      ingredients: this.state.ingredients,
+      price: this.state.totalPrice,
+      deliveryMethod: "fastest",
+      customer: {
+        name: "Vlad",
+        email: "p.v.v1313@gmail.com",
+        address: {
+          country: "Ukraine",
+          street: "Molodogvardeyska 32",
+          zipcode: 54000
+        }
+      }
+    };
+    axios
+      .post("/orders.json", orderData)
+      .then(request => console.log(request))
+      .catch(err => console.log(err));
   };
 
   render() {
