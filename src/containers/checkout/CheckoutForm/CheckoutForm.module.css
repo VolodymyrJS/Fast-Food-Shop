@@ -1,0 +1,16 @@
+.CheckoutForm {
+  width: 60%;
+  box-shadow: 1px 2px 3px;
+  display: block;
+  margin: 0 auto;
+  padding-top: 10px;
+}
+
+.CheckoutForm input {
+  display: block;
+  width: 70%;
+  box-sizing: border-box;
+  padding: 8px 20px;
+  margin: 10px auto;
+  border-radius: 7px;
+}
