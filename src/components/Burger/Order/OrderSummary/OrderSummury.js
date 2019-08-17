@@ -1,12 +1,12 @@
-import React from 'react';
-import Helper from '../../../HOC/Helper';
-import Button from '../../UI/Button/Button';
+import React from "react";
+import Helper from "../../../../HOC/Helper";
+import Button from "../../../UI/Button/Button";
 
 const OrderSummury = props => {
   const ingredientSummary = Object.keys(props.ingredients).map(ingKey => {
     return (
       <li key={ingKey}>
-        <span style={{ textTransform: 'capitalize' }}>
+        <span style={{ textTransform: "capitalize" }}>
           {ingKey}: {props.ingredients[ingKey]}
         </span>
       </li>

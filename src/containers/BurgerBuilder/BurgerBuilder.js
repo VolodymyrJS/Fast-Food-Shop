@@ -3,7 +3,7 @@ import Helper from "../../HOC/Helper";
 import Burger from "../../components/Burger/Burger";
 import BuildControls from "../../components/Burger/BuildControls/BuildControls";
 import Modal from "../../components/UI/Modal/Modal";
-import OrderSummury from "../../components/Burger/OrderSummury/OrderSummury";
+import OrderSummury from "../../components/Burger/Order/OrderSummary/OrderSummury";
 import Spinner from "../../components/UI/Spinner/Spinner";
 import axios from "../../axios-order";
 
@@ -78,29 +78,6 @@ class BurgerBuilder extends React.Component {
   };
 
   purchasingContinutHandler = () => {
-    // const orderData = {
-    //   ingredients: this.state.ingredients,
-    //   price: this.state.totalPrice,
-    //   deliveryMethod: "fastest",
-    //   customer: {
-    //     name: "Vlad",
-    //     email: "p.v.v1313@gmail.com",
-    //     address: {
-    //       country: "Ukraine",
-    //       street: "Molodogvardeyska 32",
-    //       zipcode: 54000
-    //     }
-    //   }
-    // };
-    // this.setState({ loading: true });
-    // axios
-    //   .post("/orders.json", orderData)
-    //   .then(request => {
-    //     this.setState({ loading: false, purchasing: false });
-    //   })
-    //   .catch(err => {
-    //     this.setState({ loading: false, purchasing: false });
-    //   });
     const queryParams = [];
 
     for (let i in this.state.ingredients) {
@@ -110,7 +87,7 @@ class BurgerBuilder extends React.Component {
           encodeURIComponent(this.state.ingredients[i])
       );
     }
-
+    queryParams.push("price=" + this.state.totalPrice);
     const queryString = queryParams
       .join("&")
       .replace(
