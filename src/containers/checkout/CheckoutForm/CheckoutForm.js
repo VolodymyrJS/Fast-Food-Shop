@@ -4,14 +4,17 @@ import Spinner from "../../../components/UI/Spinner/Spinner";
 import classes from "./CheckoutForm.module.css";
 import axios from "../../../axios-order";
 import { withRouter } from "react-router-dom";
+import Input from "../../../components/UI/Input/Input";
 
 class CheckoutForm extends Component {
   state = {
-    name: "",
-    imail: "",
-    address: {
-      street: "",
-      postalcode: ""
+    orderForm: {
+      deliveryMethod: "fastest",
+      name: "Vlad",
+      email: "p.v.v1313@gmail.com",
+      country: "Ukraine",
+      street: "Molodogvardeyska 32",
+      zipcode: 54000
     },
     loading: false
   };
@@ -20,17 +23,7 @@ class CheckoutForm extends Component {
     event.preventDefault();
     const orderData = {
       ingredients: this.props.ingredients,
-      price: this.props.price,
-      deliveryMethod: "fastest",
-      customer: {
-        name: "Vlad",
-        email: "p.v.v1313@gmail.com",
-        address: {
-          country: "Ukraine",
-          street: "Molodogvardeyska 32",
-          zipcode: 54000
-        }
-      }
+      price: this.props.price
     };
     this.setState({ loading: true });
     axios
@@ -47,10 +40,10 @@ class CheckoutForm extends Component {
   render() {
     let form = (
       <form className={classes.CheckoutForm}>
-        <input type="text" placeholder="Your Name" />
-        <input type="text" placeholder="Your E-Mail" />
-        <input type="text" placeholder="Your Post Code" />
-        <Button btnType="Success" clicked={this.orderHandler}>
+        <Input inputtype="input" type="text" placeholder="Your Name" />
+        <Input inputtype="input" type="text" placeholder="Your E-Mail" />
+        <Input inputtype="input" type="text" placeholder="Your Post Code" />
+        <Button inputtype="input" btnType="Success" clicked={this.orderHandler}>
           ORDER
         </Button>
       </form>
