@@ -10,9 +10,6 @@ import * as actionTypes from '../../store/actions';
 
 class BurgerBuilder extends React.Component {
   state = {
-    ingredients: null,
-    totalPrice: 4,
-    purchaseble: false,
     purchasing: false,
     loading: false
   };
@@ -25,7 +22,7 @@ class BurgerBuilder extends React.Component {
       .reduce((sum, element) => {
         return sum + element;
       }, 0);
-    this.setState({ purchaseble: sum > 0 });
+    return sum > 0;
   };
 
   purchasingHandler = () => {
@@ -37,32 +34,12 @@ class BurgerBuilder extends React.Component {
   };
 
   purchasingContinutHandler = () => {
-    const queryParams = [];
-
-    for (let i in this.state.ingredients) {
-      queryParams.push(
-        encodeURIComponent(i) +
-          "=" +
-          encodeURIComponent(this.state.ingredients[i])
-      );
-    }
-    queryParams.push("price=" + this.state.totalPrice);
-    const queryString = queryParams
-      .join("&")
-      .replace(
-        /(\w+=\d{1})&(\w+=\d{1})&(\w+=\d{1})&(\w+=\d{1})/g,
-        "$4&$3&$2&$1"
-      );
-
-    this.props.history.push({
-      pathname: "/checkout",
-      search: "?" + queryString
-    });
+    this.props.history.push('/checkout');
   };
 
   render() {
     const disableInfo = {
-      ...this.state.ingredients
+      ...this.props.ings
     };
 
     for (let key in disableInfo) {
@@ -81,7 +58,7 @@ class BurgerBuilder extends React.Component {
             ingredientRemoved={this.props.onRemoveIngredient}
             price={this.props.price}
             isDisabled={disableInfo}
-            purchaseble={this.state.purchaseble}
+            purchaseble={this.updatePurchaseState(this.props.ings)}
             ordered={this.purchasingHandler}
           />
         </Helper>
